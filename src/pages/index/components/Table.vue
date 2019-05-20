@@ -72,8 +72,6 @@ export default {
         type: 'json',
       }).then((data) => {
         const pagination = { ...this.pagination };
-        // Read total count from server
-        // pagination.total = data.totalCount;
         pagination.total = 200;
         this.loading = false;
         this.data = data.results;
