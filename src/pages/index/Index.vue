@@ -3,7 +3,6 @@
     <a-layout-sider
       width="260"
       :trigger="null"
-      collapsible
       v-model="collapsed"
     >
       <router-link to="/index">
@@ -42,7 +41,7 @@
 </template>
 
 <script>
-import IndexFooter from './components/Footer'
+import IndexFooter from '../../common/footer/Footer'
 import IndexPortrait from './components/Portrait'
 import IndexIntroduction from './components/Introduction'
 import IndexTable from './components/Table'

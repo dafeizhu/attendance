@@ -1,36 +1,59 @@
 <template>
-  <a-table :columns="columns"
-    :rowKey="record => record.login.uuid"
+  <a-table
+    :columns="columns"
+    :rowKey="data.cou_pl_id"
     :dataSource="data"
     :pagination="pagination"
     :loading="loading"
     @change="handleTableChange"
   >
-    <template slot="name" slot-scope="name">
-      {{name.first}} {{name.last}}
-    </template>
   </a-table>
 </template>
 
 <script>
 import reqwest from 'reqwest';
 const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  sorter: true,
-  width: '20%',
-  scopedSlots: { customRender: 'name' },
+  title: '院系',
+  dataIndex: 'class_academic',
+  align: 'center'
 }, {
-  title: 'Gender',
-  dataIndex: 'gender',
+  title: '年级',
+  dataIndex: 'class_grade',
   filters: [
-    { text: 'Male', value: 'male' },
-    { text: 'Female', value: 'female' },
+    { text: '2015', value: '2015' },
+    { text: '2016', value: '2016' },
+    { text: '2017', value: '2017' },
+    { text: '2018', value: '2018' }
   ],
-  width: '20%',
+  align: 'center'
 }, {
-  title: 'Email',
-  dataIndex: 'email',
+  title: '专业',
+  dataIndex: 'class_profession',
+  align: 'center'
+}, {
+  title: '班级',
+  dataIndex: 'class_class',
+  align: 'center'
+}, {
+  title: '任课老师',
+  dataIndex: 'tea_name',
+  align: 'center'
+}, {
+  title: '课程名',
+  dataIndex: 'cou_info_course_name',
+  align: 'center'
+}, {
+  title: '上课地点',
+  dataIndex: 'cou_info_address',
+  align: 'center'
+}, {
+  title: '上课日期',
+  dataIndex: 'cou_pl_date',
+  align: 'center'
+}, {
+  title: '缺勤人数',
+  dataIndex: 'count',
+  align: 'center'
 }];
 export default {
   name: 'Table',
@@ -47,7 +70,6 @@ export default {
   },
   methods: {
     handleTableChange (pagination, filters, sorter) {
-      console.log(pagination);
       const pager = { ...this.pagination };
       pager.current = pagination.current;
       this.pagination = pager;
@@ -60,21 +82,19 @@ export default {
       });
     },
     fetch (params = {}) {
-      console.log('params:', params);
       this.loading = true
       reqwest({
-        url: 'https://randomuser.me/api',
-        method: 'get',
+        url: 'http://139.199.192.171:8080/nanitao/attenceInfo/list.action',
+        method: 'post',
         data: {
-          results: 10,
-          ...params,
+          page: params.page ? params.page : 1
         },
         type: 'json',
       }).then((data) => {
         const pagination = { ...this.pagination };
-        pagination.total = 200;
+        pagination.total = data.total;
         this.loading = false;
-        this.data = data.results;
+        this.data = data.rows;
         this.pagination = pagination;
       });
     }

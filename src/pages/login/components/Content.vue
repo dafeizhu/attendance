@@ -43,7 +43,7 @@
                 v-decorator="['remember', { valuePropName: 'checked', initialValue: true, }]"
               >记住我</a-checkbox>
               <a class="login-form-forgot" href>忘记密码</a>
-              <a-button type="primary" html-type="submit" class="login-form-button" @click="handleLoginClick">登录</a-button>
+              <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
             </a-form-item>
           </a-form>
         </div>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { loginDataPost } from '../../../api/axios'
 export default {
   name: "Content",
   beforeCreate() {
@@ -92,12 +93,16 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
+          loginDataPost(values).then((res) => {
+            if (res == "OK") {
+              alert("登录成功！")
+              this.$router.push('/index')
+            }else {
+              alert("账号或密码错误，请重新登录！")
+            }
+          })
         }
       });
-    },
-    handleLoginClick () {
-      this.$router.push('/index')
     }
   },
   computed: {
