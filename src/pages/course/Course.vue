@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height:100vh">
     课程管理
   </div>
 </template>

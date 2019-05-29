@@ -12,11 +12,11 @@
         </div>
       </router-link>
       <a-menu class="index-menu" theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-        <a-menu-item key="1">
+        <a-menu-item key="1" @click="itemClick">
           <a-icon type="team" />
           <span>签到信息查询</span>
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="2" @click="itemClick">
           <a-icon type="table" />
           <span>课程管理</span>
         </a-menu-item>
@@ -29,34 +29,35 @@
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="()=> collapsed = !collapsed"
         />
-        <index-portrait></index-portrait>
+        <indexlayout-portrait></indexlayout-portrait>
       </a-layout-header>
-      <index-introduction></index-introduction>
-      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '70vh' }">
-        <index-table></index-table>
-      </a-layout-content>
-      <index-footer></index-footer>
+      <router-view></router-view>
+      <indexlayout-footer></indexlayout-footer>
     </a-layout>
   </a-layout>
 </template>
 
 <script>
-import IndexFooter from '../../common/footer/Footer'
-import IndexPortrait from './components/Portrait'
-import IndexIntroduction from './components/Introduction'
-import IndexTable from './components/Table'
+import IndexlayoutFooter from '../common/footer/Footer'
+import IndexlayoutPortrait from '../common/portrait/Portrait'
 export default {
-  name: 'Index',
   data () {
     return {
       collapsed: false,
     }
   },
   components: {
-    IndexFooter,
-    IndexPortrait,
-    IndexIntroduction,
-    IndexTable
+    IndexlayoutFooter,
+    IndexlayoutPortrait
+  },
+  methods: {
+    itemClick ({ item, key, keyPath }) {
+      if (key == 1) {
+        this.$router.push('/index/signin')
+      } else {
+        this.$router.push('/index/course')
+      }
+    }
   }
 }
 </script>
