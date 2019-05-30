@@ -28,6 +28,7 @@
           class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="()=> collapsed = !collapsed"
+          style="float: left"
         />
         <indexlayout-portrait></indexlayout-portrait>
       </a-layout-header>
@@ -52,7 +53,7 @@ export default {
   },
   methods: {
     itemClick ({ item, key, keyPath }) {
-      if (key == 1) {
+      if (!item && key == 1 && !keyPath) {
         this.$router.push('/index/signin')
       } else {
         this.$router.push('/index/course')
@@ -65,6 +66,10 @@ export default {
 <style scoped>
 .index-menu {
   margin-top: 16px;
+}
+#components-layout-demo-custom-trigger .ant-layout-header {
+  min-height: 64px;
+  position: relative;
 }
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;

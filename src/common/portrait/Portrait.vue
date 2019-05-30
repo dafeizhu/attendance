@@ -43,21 +43,22 @@ export default {
 
 <style scoped>
 .protrait {
-  position: relative;
-  margin-right: 30px;
-  float: right;
-  width: 170px;
+  position: absolute;
+  margin-right: 10px;
+  max-width: 170px;
+  top: 0;
+  right: 0;
 }
 .protrait-icon {
   float: left;
   cursor: pointer;
   text-align: center;
-  padding: 0 12px;
-  width: 48px;
+  padding: 0 8px;
+  width: 38px;
 }
 .protrait-dropdown {
   float: right;
-  padding: 0 12px;
+  padding: 0 8px;
   width: 122px;
 }
 .protrait-dropdown:hover,
@@ -75,11 +76,11 @@ export default {
   width: 30px;
   height: 30px;
 }
-.protrait-menu {
+/* .protrait-menu {
   position: absolute;
   top: 0;
   right: 0;
-}
+} */
 .protrait-menu-item {
   width: 170px;
 }

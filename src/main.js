@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Affix, Layout, Breadcrumb, Form, Input, Icon, Checkbox, Button, Row, Col, Menu, Dropdown, Divider, Avatar, Table } from 'ant-design-vue'
+import { Affix, Layout, Breadcrumb, Form, Input, Icon, Checkbox, Button, Row, Col, Menu, Dropdown, Divider, Avatar, Table, Select } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
 Vue.use(Affix)
@@ -19,6 +19,7 @@ Vue.use(Dropdown)
 Vue.use(Divider)
 Vue.use(Avatar)
 Vue.use(Table)
+Vue.use(Select)
 Vue.config.productionTip = false
 
 new Vue({
