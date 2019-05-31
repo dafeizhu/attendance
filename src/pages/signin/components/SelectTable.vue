@@ -5,19 +5,58 @@
       @submit="handleSubmit"
     >
       <a-form-item
-        v-for="(select, index) in selects"
         :label-col="{ span: 6 }"
         :wrapper-col="{ span: 18 }"
-        :label="select.name"
-        :key="index"
+        :label="grade.name"
       >
         <a-select
-          v-decorator="[select.name]"
-          :placeholder='"请选择"+select.name'
+          v-decorator="['grade']"
+          :placeholder='"请选择"+grade.name'
+          @change="handleSelectGrade"
         >
           <a-select-option
             :value="value"
-            v-for="(value, index) in select.option"
+            v-for="(value, index) in grade.option"
+            :key="index"
+          >
+            {{value}}
+          </a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item
+        :label-col="{ span: 6 }"
+        :wrapper-col="{ span: 18 }"
+        label="院系"
+        v-if="academic"
+      >
+        <a-select
+          v-decorator="['academic']"
+          placeholder="请选择院系"
+          @change="handleSelectAcademic"
+        >
+          <a-select-option
+            :value="value"
+            v-for="(value, index) in academic"
+            :key="index"
+          >
+            {{value}}
+          </a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item
+        :label-col="{ span: 6 }"
+        :wrapper-col="{ span: 18 }"
+        label="专业"
+        v-if="profession"
+      >
+        <a-select
+          v-decorator="['profession']"
+          placeholder="请选择专业"
+          @change="handleSelectProfession"
+        >
+          <a-select-option
+            :value="value"
+            v-for="(value, index) in profession"
             :key="index"
           >
             {{value}}
@@ -29,7 +68,7 @@
         :label-col="{ span: 5 }"
         :wrapper-col="{ span: 19 }"
       >
-        <a-input v-decorator="['课程']" placeholder='请输入课程名' />
+        <a-input v-decorator="['courseName']" placeholder='请输入课程名' />
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 1 }">
         <a-button
@@ -44,30 +83,35 @@
 </template>
 
 <script>
+import { selectListGrade, selectListAcademic } from '../../../api/axios'
 export default {
   name: 'SelectTable',
   data () {
     return {
       formLayout: 'horizontal',
       form: this.$form.createForm(this),
-      selects: [
-        {
-          name: '年级',
-          option: ['2015', '2016', '2017', '2018']
-        },
-        {
-          name: '院系',
-          option: ['信息科学学院', '会计学院', '管理学院', '经贸学院']
-        },
-        {
-          name: '专业',
-          option: ['计算机科学与技术', '电子', '软件工程', '数字媒体']
-        },
-        {
-          name: '班级',
-          option: ['A班', 'B班', 'C班']
-        }
-      ],
+      grade: {
+        id: 'grade',
+        name: '年级',
+        option: ['2015', '2016', '2017', '2018']
+      },
+      academic: '',
+      profession: ''
+        // {
+        //   id: 'academic',
+        //   name: '院系',
+        //   option: ['信息科学学院', '会计学院', '管理学院', '经贸学院']
+        // },
+        // {
+        //   id: 'profession',
+        //   name: '专业',
+        //   option: ['计算机科学与技术', '电子', '软件工程', '数字媒体']
+        // },
+        // {
+        //   id: 'Class',
+        //   name: '班级',
+        //   option: ['A', 'B', 'C']
+        // }
     }
   },
   methods: {
@@ -75,9 +119,26 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
+          this.$emit('searchBtn', values)
         }
       });
+    },
+    handleSelectGrade () {
+      var Academic = []
+      selectListGrade ().then((data) => {
+        data.forEach((item) => {
+          Academic.push(item.academic_name)
+        })
+      })
+      this.academic = Academic
+    },
+    handleSelectAcademic (value) {
+      selectListAcademic (value).then((data) => {
+        console.log(data)
+      })
+    },
+    handleSelectProfession (value) {
+      console.log(value)
     }
   },
 }

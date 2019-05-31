@@ -43,8 +43,9 @@
                 <a-checkbox
                   v-decorator="['remember', { valuePropName: 'checked', initialValue: true, }]"
                 >记住我</a-checkbox>
-                <a class="login-form-forgot" href>忘记密码</a>
+                <a class="login-form-forgot" @click="handleForgetClick">忘记密码</a>
                 <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
+                <a class="login-form-register" @click="handleRegisterClick">注册</a>
               </a-form-item>
             </a-form>
           </div>
@@ -98,13 +99,21 @@ export default {
           loginDataPost(values).then((res) => {
             if (res[0].islogin == "1") {
               alert(res[0].Msg)
-              this.$router.push('/index')
+              this.$router.push({
+                name: 'SignIn'
+              })
             }else {
               alert(res[0].Msg)
             }
           })
         }
       });
+    },
+    handleForgetClick () {
+      this.$router.push('/forget')
+    },
+    handleRegisterClick () {
+      this.$router.push('/register')
     }
   },
   computed: {

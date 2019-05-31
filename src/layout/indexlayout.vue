@@ -45,6 +45,7 @@ export default {
   data () {
     return {
       collapsed: false,
+      sessionId: ''
     }
   },
   components: {
@@ -52,10 +53,10 @@ export default {
     IndexlayoutPortrait
   },
   methods: {
-    itemClick ({ item, key, keyPath }) {
-      if (!item && key == 1 && !keyPath) {
+    itemClick ({ key }) {
+      if (key == 1) {
         this.$router.push('/index/signin')
-      } else {
+      } else if (key == 2) {
         this.$router.push('/index/course')
       }
     }

@@ -16,11 +16,22 @@ export default new Router({
           path: 'login',
           name: 'login',
           component: () => import(/* webpackChunkName: "user" */ '../pages/user/Login')
+        },
+        {
+          path: 'register',
+          name: 'register',
+          component: () => import(/* webpackChunkName: "user" */ '../pages/user/Register')
+        },
+        {
+          path: 'forget',
+          name: 'forget',
+          component: () => import(/* webpackChunkName: "user" */ '../pages/user/Forget')
         }
       ]
     },
     {
       path: '/index',
+      name: 'index',
       redirect: '/index/signin',
       component: IndexLayout,
       children: [
