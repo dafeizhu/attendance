@@ -53,6 +53,9 @@ export default {
         }
         case 3:{
           this.delCookie()
+          this.$router.push({
+            name: 'login'
+          })
         }
       }
     },
@@ -61,9 +64,6 @@ export default {
       if (cookie != null) {
         window.document.cookie = 'userName' + '=' + '' + ';path=/;expires=' + ''
         window.document.cookie = 'userPwd' + '=' + '' + ';path=/;expires=' + ''
-        this.$router.push({
-          name: 'login'
-        })
       }
     }
   }
