@@ -31,8 +31,11 @@ import layoutFooter from '../common/footer/Footer'
 export default {
   data () {
     return {
-      items: ['基本版', 'English', '手机版']
+      items: ['基本版', 'English', '手机版'],
+      spinning: false
     }
+  },
+  created() {
   },
   mounted () {
     document.body.classList.add('userLayout')
