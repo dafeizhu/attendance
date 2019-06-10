@@ -40,7 +40,6 @@ export default {
         this.searchData = data
         console.log(this.searchData)
       })
->>>>>>> pages-user
     }
   }
 }

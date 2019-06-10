@@ -17,8 +17,8 @@
               </div>
             </a-layout-header>
       <a-layout-content>
-              <router-view></router-view>
-            </a-layout-content>
+        <router-view></router-view>
+      </a-layout-content>
       <a-layout-footer >
               <layout-footer></layout-footer>
             </a-layout-footer>
