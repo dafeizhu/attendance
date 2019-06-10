@@ -2,27 +2,28 @@
   <div id="components-layout-demo-basic">
     <a-layout>
       <a-layout-header>
-        <div>
-          <div class="header-left">
-            <p>拿你桃管理系统</p>
-          </div>
-          <div class="header-right">
-            <a-breadcrumb separator="|">
-              <a-breadcrumb-item
-                v-for="item of items"
-                :key="item"
-              ><a href="">{{item}}</a></a-breadcrumb-item>
-            </a-breadcrumb>
-          </div>
-        </div>
-      </a-layout-header>
+              <div>
+                <div class="header-left">
+                  <p>拿你桃管理系统</p>
+                </div>
+                <div class="header-right">
+                  <a-breadcrumb separator="|">
+                    <a-breadcrumb-item
+                      v-for="item of items"
+                      :key="item"
+                    ><a href="">{{item}}</a></a-breadcrumb-item>
+                  </a-breadcrumb>
+                </div>
+              </div>
+            </a-layout-header>
       <a-layout-content>
-        <router-view></router-view>
-      </a-layout-content>
-      <a-layout-footer>
-        <layout-footer></layout-footer>
-      </a-layout-footer>
+              <router-view></router-view>
+            </a-layout-content>
+      <a-layout-footer >
+              <layout-footer></layout-footer>
+            </a-layout-footer>
     </a-layout>
+
   </div>
 </template>
 
@@ -32,7 +33,7 @@ export default {
   data () {
     return {
       items: ['基本版', 'English', '手机版'],
-      spinning: false
+      show:false
     }
   },
   created() {

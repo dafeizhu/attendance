@@ -50,25 +50,14 @@
             </a-col>
           </a-row>
       </div>
-      <a-modal
-              title="提示"
-              v-model="visible"
-              @ok="handleOk"
-      >
-          <p>登录成功！</p>
-      </a-modal>
-      <a-modal
-              title="提示"
-              v-model="fail"
-              @ok="handleConfirm"
-      >
-          <p>用户名或密码不正确！</p>
-      </a-modal>
   </div>
 </template>
 
 <script>
 import { loginDataPost } from '../../api/axios'
+import {message} from 'ant-design-vue'
+import Vue from 'vue'
+Vue.prototype.$message = message
 export default {
   name: "Login",
   beforeCreate() {
@@ -116,12 +105,19 @@ export default {
         if (!err) {
           loginDataPost(values).then((res) => {
             if (res[0].islogin == "1") {
-              this.visible = true
+              this.$message.success('登录成功',2)
+              this.$router.push({
+                    name: 'SignIn'
+                })
               if (values.remember === true) {
                 that.setCookie(values.userName,values.password,7)
               }
-            }else {
-                this.fail = true
+            } else {
+                this.$message.error('用户名或密码不正确',2)
+                this.form.setFieldsValue({
+                    'userName': '',
+                    'password': ''
+                })
             }
           })
         }
@@ -154,19 +150,6 @@ export default {
         }
       }
     },
-    handleOk:function () {
-        this.$router.push({
-            name: 'SignIn'
-        })
-    },
-
-    handleConfirm:function () {
-        this.fail = false
-        this.form.setFieldsValue({
-            'userName': '',
-            'password': ''
-        })
-    }
   },
   computed: {
     randomNum () {
