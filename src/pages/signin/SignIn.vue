@@ -35,8 +35,6 @@ export default {
   methods: {
     handleSearchBtn (val) {
       this.searchData = val
-<<<<<<< HEAD
-=======
       const params = {}
       signInDataPost (params, val).then((data) => {
         this.searchData = data
