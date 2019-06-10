@@ -9,10 +9,18 @@
       </a>
       <a-menu class="protrait-menu" slot="overlay">
         <a-menu-item class="protrait-menu-item" v-for="item of items" :key="item.id" @click="handleClick">
-          <a href="javascript:;"><a-icon class="protrait-menu-item-icon" :type="item.icon"/>{{item.name}}</a>
+            <a href="javascript:;"><a-icon class="protrait-menu-item-icon" :type="item.icon"/>{{item.name}}</a>
         </a-menu-item>
       </a-menu>
     </a-dropdown>
+    <a-modal
+            title="提示"
+            v-model="visible"
+            @ok="handleOk"
+            @cancel="handleCancel"
+    >
+      <p>是否退出？</p>
+    </a-modal>
   </div>
 </template>
 
@@ -21,6 +29,7 @@ export default {
   name: 'Portrait',
   data() {
     return {
+      visible:false,
       items: [{
         id: 1,
         name: '个人中心',
@@ -52,12 +61,21 @@ export default {
           break
         }
         case 3:{
-          this.delCookie()
-          this.$router.push({
-            name: 'login'
-          })
+          this.visible = true
+
         }
       }
+    },
+    handleOk:function () {
+      this.visible = false
+      this.delCookie()
+      this.$message.success('退出成功！')
+      this.$router.push({
+        name: 'login'
+      })
+    },
+    handleCancel:function () {
+      this.visible = false
     },
     delCookie:function () {
       const cookie = window.document.cookie

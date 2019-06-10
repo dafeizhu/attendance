@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Affix, Layout, Breadcrumb, Form, Input, Icon, Checkbox, Button, Row, Col, Menu, Dropdown, Divider, Avatar, Table, Select, Modal} from 'ant-design-vue'
+import { Affix, Layout, Breadcrumb, Form, Input, Icon, Checkbox, Button, Row, Col, Menu, Dropdown, Divider, Avatar, Table, Select, Modal,message, Spin} from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import store from './store'
 import axios from 'axios';
@@ -23,6 +23,8 @@ Vue.use(Avatar)
 Vue.use(Table)
 Vue.use(Select)
 Vue.use(Modal)
+Vue.use(Spin)
+Vue.prototype.$message = message
 Vue.config.productionTip = false
 axios.defaults.withCredentials=true;
 
