@@ -49,6 +49,7 @@ export function selectListGrade () {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     }
   }).then((res) => {
+    console.log(res);
     return Promise.resolve(res.data)
   })
 }
@@ -64,6 +65,7 @@ export function selectListAcademic (value) {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     }
   }).then((res) => {
+    console.log(res);
     return Promise.resolve(res.data)
   })
 }

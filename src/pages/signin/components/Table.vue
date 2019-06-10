@@ -92,6 +92,7 @@ export default {
     fetch (params = {}) {
       this.loading = true
       signInDataPost (params, this.searchData).then((data) => {
+        console.log(data);
         const pagination = { ...this.pagination };
         pagination.total = data.total;
         this.loading = false;

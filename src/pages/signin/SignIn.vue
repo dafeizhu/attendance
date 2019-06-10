@@ -12,7 +12,7 @@
 import SigninIntroduction from './components/Introduction'
 import SigninTable from './components/Table'
 import SigninSelecttable from './components/SelectTable'
-import { signInDataPost } from '../../api/axios'
+// import { signInDataPost } from '../../api/axios'
 export default {
   name: 'SignIn',
   data () {
@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     handleSearchBtn (val) {
+      console.log(val);
       this.searchData = val
       // const params = {}
       // signInDataPost (params, val).then((data) => {

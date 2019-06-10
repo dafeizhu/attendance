@@ -1,12 +1,22 @@
 <template>
   <div style="min-height:100vh">
-    课程管理
+    <course-introduction></course-introduction>
+    <course-selec-table></course-selec-table>
+    <course-table></course-table>
   </div>
 </template>
 
 <script>
+import CourseIntroduction from './components/Introduction'
+import CourseTable from './components/Table'
+import CourseSelecTable from './components/SelectTable'
 export default {
-  name: 'Course'
+  name: 'Course',
+  components: {
+    CourseIntroduction,
+    CourseTable,
+    CourseSelecTable
+  }
 }
 </script>
 

@@ -118,6 +118,7 @@ export default {
     handleSubmit (e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
+        console.log(values);
         if (!err) {
           this.$emit('searchBtn', values)
         }
@@ -133,6 +134,7 @@ export default {
       this.academic = Academic
     },
     handleSelectAcademic (value) {
+      console.log(value);
       selectListAcademic (value).then((data) => {
         console.log(data)
       })

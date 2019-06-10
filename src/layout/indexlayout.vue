@@ -28,8 +28,7 @@
           class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="()=> collapsed = !collapsed"
-          style="float: left"
-        />
+          style="float: left"></a-icon>
         <indexlayout-portrait></indexlayout-portrait>
       </a-layout-header>
       <router-view></router-view>
