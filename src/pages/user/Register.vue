@@ -1,10 +1,16 @@
 <template>
-  <div>注册界面</div>
+  <div>
+    <loading><div>111111</div></loading>
+  </div>
+
 </template>
 
 <script>
+
+import Loading from "./Loading";
 export default {
-  name: 'Register'
+  name: 'Register',
+  components: {Loading}
 }
 </script>
 

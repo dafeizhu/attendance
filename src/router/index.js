@@ -18,14 +18,14 @@ export default new Router({
           component: () => import(/* webpackChunkName: "user" */ '../pages/user/Login')
         },
         {
-          path: 'register',
-          name: 'register',
-          component: () => import(/* webpackChunkName: "user" */ '../pages/user/Register')
-        },
-        {
           path: 'forget',
           name: 'forget',
           component: () => import(/* webpackChunkName: "user" */ '../pages/user/Forget')
+        },
+        {
+          path: 'register',
+          name: 'register',
+          component: () => import(/* webpackChunkName: "user" */ '../pages/user/Register')
         }
       ]
     },
@@ -44,6 +44,11 @@ export default new Router({
           path: 'course',
           name: 'Course',
           component: () => import(/* webpackChunkName: "user" */ '../pages/course/Course')
+        },
+        {
+          path: 'admin',
+          name: 'Admin',
+          component: () => import(/* webpackChunkName: "user" */ '../pages/admin/Admin')
         }
       ]
     }

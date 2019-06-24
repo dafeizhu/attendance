@@ -96,6 +96,7 @@ export default {
       this.academic = academicArr
     },
     handleSelectAcademic (value) {
+        console.log(value)
       // 先将后边的下拉列表内容置空
       this.form.resetFields("profession");
       this.classes = ""
