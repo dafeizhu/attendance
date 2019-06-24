@@ -97,6 +97,7 @@ export default {
         pagination.total = data.total;
         this.loading = false;
         this.data = data.rows;
+        console.log(this.data);
         this.pagination = pagination;
       })
     }
