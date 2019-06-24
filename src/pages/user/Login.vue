@@ -1,69 +1,72 @@
 <template>
   <div id="components-layout-demo-basic">
-    <div class="wrapper">
-      <a-row>
-        <a-col :xs="0" :sm="0" :md="12" :lg="12" :xl="12">
-          <div class="content-right">
-            <span class="content-right-title">好学生，不逃课！</span>
-            <p class="content-right-dscone">{{contentRight[randomNum].dscOne}}</p>
-            <p class="content-right-dsctwo">{{contentRight[randomNum].dscTwo}}</p>
-            <img class="content-right-img" :src="contentRight[randomNum].imgUrl" />
-          </div>
-        </a-col>
-        <a-col :xs="0" :sm="4" :md="0" :lg="0" :xl="0" />
-        <a-col :xs="24" :sm="20" :md="12" :lg="12" :xl="12">
-          <div class="login-form-border">
-            <p>欢迎登录</p>
-            <a-form
-              id="components-form-demo-normal-login"
-              :form="form"
-              class="login-form"
-              @submit="handleSubmit"
-            >
-              <a-form-item>
-                <a-input
-                  v-decorator="['userName',
-                  { rules: [{ required: true, message: '请输入用户名!' }] }]"
-                  placeholder="用户名"
+      <div class="wrapper">
+          <a-row>
+            <a-col :xs="0" :sm="0" :md="12" :lg="12" :xl="12">
+              <div class="content-right">
+                <span class="content-right-title">好学生，不逃课！</span>
+                <p class="content-right-dscone">{{contentRight[randomNum].dscOne}}</p>
+                <p class="content-right-dsctwo">{{contentRight[randomNum].dscTwo}}</p>
+                <img class="content-right-img" :src="contentRight[randomNum].imgUrl" />
+              </div>
+            </a-col>
+            <a-col :xs="0" :sm="4" :md="0" :lg="0" :xl="0" />
+            <a-col :xs="24" :sm="20" :md="12" :lg="12" :xl="12">
+              <div class="login-form-border">
+                <p>欢迎登录</p>
+                <a-form
+                  id="components-form-demo-normal-login"
+                  :form="form"
+                  class="login-form"
+                  @submit="handleSubmit"
                 >
-                  <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-input
-                  v-decorator="['password',
-                  { rules: [{ required: true, message: '请输入密码!' }] }]"
-                  type="password"
-                  placeholder="请输入密码"
-                >
-                  <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-checkbox
-                  v-decorator="['remember', { valuePropName: 'checked', initialValue: true, }]"
-                >记住我</a-checkbox>
-                <a class="login-form-forgot" @click="handleForgetClick">忘记密码</a>
-                <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
-                <a class="login-form-register" @click="handleRegisterClick">注册</a>
-              </a-form-item>
-            </a-form>
-          </div>
-        </a-col>
-      </a-row>
-    </div>
+                  <a-form-item>
+                    <a-input
+                      v-decorator="['userName',
+                      { rules: [{ required: true, message: '请输入用户名!' }] }]"
+                      placeholder="用户名"
+                    >
+                      <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
+                    </a-input>
+                  </a-form-item>
+                  <a-form-item>
+                    <a-input
+                      v-decorator="['password',
+                      { rules: [{ required: true, message: '请输入密码!' }] }]"
+                      type="password"
+                      placeholder="请输入密码"
+                    >
+                      <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
+                    </a-input>
+                  </a-form-item>
+                  <a-form-item>
+                    <a-checkbox
+                      v-decorator="['remember', { valuePropName: 'checked', initialValue: true, }]"
+                    >记住我</a-checkbox>
+                    <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
+                  </a-form-item>
+                </a-form>
+              </div>
+            </a-col>
+          </a-row>
+      </div>
   </div>
 </template>
 
 <script>
 import { loginDataPost } from '../../api/axios'
+import {message} from 'ant-design-vue'
+import Vue from 'vue'
+Vue.prototype.$message = message
 export default {
   name: "Login",
   beforeCreate() {
-    this.form = this.$form.createForm(this);
+    this.form = this.$form.createForm(this)
   },
   data () {
     return {
+      visible: false,
+      fail: false,
       contentRight: [{
         dscOne: '逃得了初一，逃不过十五',
         dscTwo: '跑得了和尚，跑不了庙',
@@ -91,30 +94,62 @@ export default {
       }]
     }
   },
+  mounted () {
+    this.getCookie()
+  },
   methods: {
     handleSubmit(e) {
+      var that = this
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
           loginDataPost(values).then((res) => {
             if (res[0].islogin == "1") {
-              alert(res[0].Msg)
+              this.$message.success('登录成功',2)
               this.$router.push({
-                name: 'SignIn'
-              })
-            }else {
-              alert(res[0].Msg)
+                    name: 'SignIn'
+                })
+              if (values.remember === true) {
+                that.setCookie(values.userName,values.password,7)
+              }
+            } else {
+                this.$message.error('用户名或密码不正确',2)
+                this.form.setFieldsValue({
+                    'userName': '',
+                    'password': ''
+                })
             }
           })
         }
       });
     },
-    handleForgetClick () {
-      this.$router.push('/forget')
+    // 设置cookie
+    setCookie (c_name, c_pwd, exdays) {
+      var exdate = new Date()
+      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays)
+      window.document.cookie = 'userName' + '=' + c_name + ';path=/;expires=' + exdate.toGMTString()
+      window.document.cookie = 'userPwd' + '=' + c_pwd + ';path=/;expires=' + exdate.toGMTString()
     },
-    handleRegisterClick () {
-      this.$router.push('/register')
-    }
+    // 读取cookie
+    getCookie:function() {
+      var that = this
+      if (document.cookie.length > 0) {
+        var arr = document.cookie.split('; ') // 这里显示的格式需要切割一下自己可输出看下
+        for (var i = 0; i < arr.length; i++) {
+          var arr2 = arr[i].split('=') // 再次切割
+          // 判断查找相对应的值
+          if (arr2[0] === 'userName') {
+            that.form.setFieldsValue({
+              'userName': arr2[1]
+            }) // 保存到保存数据的地方
+          } else if (arr2[0] === 'userPwd') {
+            that.form.setFieldsValue({
+              'password': arr2[1]
+            })
+          }
+        }
+      }
+    },
   },
   computed: {
     randomNum () {
@@ -182,7 +217,17 @@ export default {
   border-radius: 8px
 }
 .wrapper {
-  widows: 100%;
+  width: 100%;
+}
+
+.login-form >>> .ant-input {
+    width: 331.75px;
+}
+
+.login-form-button {
+    min-height: 40px;
+    width: 331.75px;
+    font-size: 20px;
 }
 .login-form-border {
   border: 1px solid skyblue;
@@ -190,7 +235,8 @@ export default {
   border-radius: 30px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, .4);
   max-width: 420px;
-  min-width: 400px
+  min-width: 400px;
+  min-height: 405px;
 }
 .login-form-border p {
   font-size: 36px;
@@ -201,7 +247,7 @@ export default {
 #components-form-demo-normal-login .login-form {
   min-width: 430px;
 }
-#components-form-demo-normal-login .login-form-button {
+#components-form-demo-normal-login  {
   min-height: 40px;
   width: 100%;
   font-size: 20px
