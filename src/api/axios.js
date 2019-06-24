@@ -51,7 +51,6 @@ export function signInDataPost(params, searchKey) {
 // 年级下拉列表点击方法
 export function selectListGrade() {
   const url = "http://139.199.192.171:8080/nanitao/findAcademic/list.action";
-<<<<<<< HEAD
   return axios.get(url, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -60,17 +59,6 @@ export function selectListGrade() {
     console.log(res);
     return Promise.resolve(res.data)
   })
-=======
-  return axios
-    .get(url, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-      }
-    })
-    .then(res => {
-      return Promise.resolve(res.data);
-    });
->>>>>>> a561dffa137e65ea71e04e83120e9b6d9a2c7fda
 }
 
 // 院系下拉列表点击方法
@@ -78,18 +66,7 @@ export function selectListAcademic(value) {
   const url = "http://139.199.192.171:8080/nanitao/findProfession/list.action";
   const data = {
     academicAcademic: value
-<<<<<<< HEAD
   }
-  return axios.post(url, qs.stringify(data), {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    }
-  }).then((res) => {
-    console.log(res);
-    return Promise.resolve(res.data)
-  })
-=======
-  };
   return axios
     .post(url, qs.stringify(data), {
       headers: {
@@ -116,7 +93,6 @@ export function selectListProfession(value) {
     .then(res => {
       return Promise.resolve(res.data);
     });
->>>>>>> a561dffa137e65ea71e04e83120e9b6d9a2c7fda
 }
 
 

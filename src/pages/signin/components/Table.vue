@@ -100,23 +100,12 @@ export default {
     },
     fetch (params = {}) {
       this.loading = true
-<<<<<<< HEAD
-      signInDataPost (params, this.searchData).then((data) => {
-        console.log(data);
-        const pagination = { ...this.pagination };
-        pagination.total = data.total;
-        this.loading = false;
-        this.data = data.rows;
-        console.log(this.data);
-        this.pagination = pagination;
-=======
       signInDataPost(params, this.searchData).then(data => {
         const pagination = { ...this.pagination }
         pagination.total = data.total
         this.loading = false
         this.data = data.rows
         this.pagination = pagination
->>>>>>> a561dffa137e65ea71e04e83120e9b6d9a2c7fda
       })
     }
   },

@@ -97,11 +97,6 @@ export default {
       this.academic = academicArr
     },
     handleSelectAcademic (value) {
-<<<<<<< HEAD
-      console.log(value);
-      selectListAcademic (value).then((data) => {
-        console.log(data)
-=======
       // 先将后边的下拉列表内容置空
       this.form.resetFields("profession");
       this.classes = ""
@@ -110,7 +105,6 @@ export default {
         data.forEach(item => {
           professionArr.push(item.profession_name)
         })
->>>>>>> a561dffa137e65ea71e04e83120e9b6d9a2c7fda
       })
       this.profession = professionArr
     },
