@@ -36,7 +36,6 @@ export function signInDataPost(params, searchKey) {
       courseName: searchKey.courseName ? searchKey.courseName : ""
     };
   }
-  console.log(data);
   return axios
     .post(url, qs.stringify(data), {
       headers: {
@@ -46,6 +45,38 @@ export function signInDataPost(params, searchKey) {
     .then(res => {
       return Promise.resolve(res.data);
     });
+}
+
+//管理员查询接口函数
+export function adminDataPost(params, searchKey) {
+  const url = "http://139.199.192.171:8080/nanitao/studentAdmin/list.action";
+  if (!searchKey) {
+    var data = {
+      page: params.page ? params.page : 1
+    };
+  } else {
+    data = {
+      row: 10,
+      page: params.page ? params.page : 1,
+      grade: searchKey.grade ? searchKey.grade : "",
+      academic: searchKey.academic ? searchKey.academic : "",
+      profession: searchKey.profession ? searchKey.profession : "",
+      Class: searchKey.class ? searchKey.class : "",
+      courseName: searchKey.courseName ? searchKey.courseName : ""
+    };
+  }
+  console.log(data)
+  return axios
+      .get(url,  {
+        params: data,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        return Promise.resolve(res.data);
+      });
 }
 
 // 年级下拉列表点击方法
@@ -74,6 +105,7 @@ export function selectListAcademic(value) {
       }
     })
     .then(res => {
+      console.log(res.data)
       return Promise.resolve(res.data);
     });
 }

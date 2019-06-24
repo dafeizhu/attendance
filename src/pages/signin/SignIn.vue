@@ -17,7 +17,11 @@
 import SigninIntroduction from "./components/Introduction"
 import SigninTable from "./components/Table"
 import SigninSelecttable from "./components/SelectTable"
+<<<<<<< HEAD
 
+=======
+import {signInDataPost} from '../../api/axios'
+>>>>>>> pages-user
 export default {
   name: "SignIn",
   data () {

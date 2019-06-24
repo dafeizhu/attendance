@@ -20,6 +20,10 @@
           <a-icon type="table" />
           <span>课程管理</span>
         </a-menu-item>
+        <a-menu-item key="3" @click="itemClick">
+          <a-icon type="user" />
+          <span>管理员查询</span>
+        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -57,6 +61,8 @@ export default {
         this.$router.push('/index/signin')
       } else if (key == 2) {
         this.$router.push('/index/course')
+      } else if (key == 3) {
+        this.$router.push('/index/admin')
       }
     }
   }
