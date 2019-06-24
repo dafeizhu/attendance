@@ -118,3 +118,46 @@ export function selectListProfession(value) {
     });
 >>>>>>> a561dffa137e65ea71e04e83120e9b6d9a2c7fda
 }
+
+
+// 课程信息查询接口函数
+export function courseDataPost (params, searchKey) {
+  const url = "http://139.199.192.171:8080/nanitao/courfeInfo/list.action";
+  if (!searchKey) {
+     var data = {
+      page: params.page ? params.page : 1
+    }
+  } else {
+    data = {
+      page: params.page ? params.page : 1,
+      grade: searchKey.grade ? searchKey.grade : '',
+      academic: searchKey.academic ? searchKey.academic : '',
+      profession: searchKey.profession ? searchKey.profession : '',
+      Class: searchKey.Class ? searchKey.Class : '',
+      courseName: searchKey.courseName ? searchKey.courseName : '',
+    }
+  }
+  return axios.post(url, qs.stringify(data),{
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;'
+    }
+  }).then((res) => {
+    console.log(res.data);
+    return Promise.resolve(res.data)
+  })
+}
+
+export function courseDelete (id){
+  const url = "http://139.199.192.171:8080/nanitao/courseInfo/deletecourseInfo.action";
+  var data = {
+    id: id
+  }
+  return axios.post(url,qs.stringify(data),{
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;'
+    }
+  }).then((res) => {
+    console.log(res);
+    return Promise.resolve(res)
+  })
+}
