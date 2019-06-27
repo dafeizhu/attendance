@@ -2,48 +2,40 @@
     <!--@change="handleTableChange"-->
     <div class="wrapper">
         <a-table
+            row-key="cou_info_id"
             :columns="columns"
             :dataSource="data"
             :pagination="pagination"
             :loading="loading"
             @change="handleTableChange"
-    >
-    <template slot="operate" slot-scope="text, record">
-        <a-popconfirm
-            v-if="data.length"
-            title="Sure to delete?"
-            @confirm="() => onDelete(record.key)"
         >
-            <a href="javascript:;">Delete</a>
-        </a-popconfirm>
-        <a  @click="showModal" href="javascript:;">
-            Edit
-        </a>
-        <a-modal
-            :maskStyle="maskStyle"
-            v-model="visible"
-            title="Title"
-            onOk="handleOk"
-        >
-            <template slot="footer">
-                <a-button key="back" @click="handleCancel">Return</a-button>
-                <a-button key="submit" type="primary" :loading="EditLoading" @click="handleOk">
-                    Submit
-                </a-button>
+            <template slot="operate" slot-scope="text, record">
+                <a-popconfirm
+                    v-if="data.length"
+                    title="Sure to delete?"
+                    @confirm="() => onDelete(record.key)"
+                >
+                    <a href="javascript:;">Delete</a>
+                </a-popconfirm>
+                <a-divider type="vertical" />
+                <a @click="handleEdit(record.key)">
+                    Edit
+                </a>
             </template>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-        </a-modal>
-    </template>
-    </a-table>
+        </a-table>
+        <edit-modal
+                :edit-data="EditData"
+                @submit="handleOk"
+                ref="modal"
+        >
+
+        </edit-modal>
     </div>
 </template>
 
 <script>
-  import { courseDataPost,courseDelete } from '../../../api/axios'
+  import { courseDataPost,courseDelete,courseEdit,courseEdited } from '../../../api/axios'
+  import EditModal from './modules/EditModal'
   const columns = [{
     title: '课程名',
     dataIndex: 'cou_info_course_name',
@@ -92,6 +84,9 @@
   }];
   export default {
     name: 'CourseTable',
+    components:{
+      EditModal
+    },
     props: {
       searchData: {
         type: Object,
@@ -103,42 +98,45 @@
     },
     data() {
       return {
-        maskStyle: {opacity:0.2,backgroundColor:'rgba(0, 0, 0, 0.2)'},
+        // visible:false,
         data: [],
         pagination: {},
         loading: false,
-        EditLoading: false,
-        visible: false,
-        bbb: {},
-        abc:[],
+        DeleteInfo: {},
+        EditData:{},
+        EditedData:{},
         columns
       }
     },
     methods: {
-      showModal() {
-        this.visible = true;
+      handleEdit(key){
+        this.EditData = {}
+        courseEdit(key).then((data) =>{
+          if(data.statusText == 'OK'){
+            this.EditData = data.data
+            this.$refs.modal.edit()
+            // this.visible = true
+          }
+        })
       },
-      handleOk() {
-        this.loading = true;
-        setTimeout(() => {
-          this.visible = false;
-          this.loading = false;
-        }, 3000);
-      },
-      handleCancel() {
-        this.visible = false;
+      handleOk(val) {
+        // this.EditData= {}
+        console.log(this.EditData);
+        courseEdited(val).then((data) =>{
+          if (data.data =='OK'){
+
+            this.fetch()
+          }
+        })
       },
       onDelete(key){
-        const dataSource = [...this.data]
         console.log(key);
-        this.bbb = dataSource.find(item =>item.key == key)
-        courseDelete(this.bbb.cou_info_id).then((data) =>{
-          console.log(data);
+        courseDelete(key).then((data) =>{
+         if(data.data=="OK"){
+
+           this.fetch()
+         }
         })
-        // // this.data = dataSource.find(item =>item.key == key)
-        // this.data = dataSource.filter(item =>item.key!==key)
-
-
       },
       handleTableChange (pagination, filters, sorter) {
         const pager = { ...this.pagination };

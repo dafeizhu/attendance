@@ -97,12 +97,42 @@ export function courseDataPost (params, searchKey) {
     return Promise.resolve(res.data)
   })
 }
-
+// 删除课程信息接口函数
 export function courseDelete (id){
   const url = "http://139.199.192.171:8080/nanitao/courseInfo/deletecourseInfo.action";
   var data = {
     id: id
   }
+  return axios.post(url,qs.stringify(data),{
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;'
+    }
+  }).then((res) => {
+    console.log(res);
+    return Promise.resolve(res)
+  })
+}
+
+// 编辑课程信息接口函数
+export function courseEdit (id){
+  const url = "http://139.199.192.171:8080/nanitao/courseInfo/getCourseInfoById.action";
+  var data = {
+    id: id
+  }
+  return axios.post(url,qs.stringify(data),{
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;'
+    }
+  }).then((res) => {
+    console.log(res);
+    return Promise.resolve(res)
+  })
+}
+
+// 课程信息编辑完成接口函数
+export function courseEdited (val){
+  const url = "http://139.199.192.171:8080/nanitao/courseInfo/updatecourseInfo.action";
+  var data = val
   return axios.post(url,qs.stringify(data),{
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;'
