@@ -1,11 +1,5 @@
 <template>
-  <a-table
-    :columns="columns"
-    :dataSource="data"
-    :pagination="pagination"
-    :loading="loading"
-    @change="handleTableChange"
-  ></a-table>
+  <a-table :columns="columns" :dataSource="data" :pagination="pagination" :loading="loading" @change="handleTableChange"></a-table>
 </template>
 
 <script>

@@ -2,16 +2,8 @@
   <div class="wrapper">
     <a-form :form="form" @submit="handleSubmit">
       <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }" :label="grade.name">
-        <a-select
-          v-decorator="['grade']"
-          :placeholder="'请选择'+grade.name"
-          @change="handleSelectGrade"
-        >
-          <a-select-option
-            :value="value"
-            v-for="(value, index) in grade.option"
-            :key="index"
-          >{{value}}</a-select-option>
+        <a-select v-decorator="['grade']" :placeholder="'请选择'+grade.name" @change="handleSelectGrade">
+          <a-select-option :value="value" v-for="(value, index) in grade.option" :key="index">{{value}}</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }" label="院系" v-if="academic">
@@ -19,38 +11,18 @@
           <a-select-option :value="value" v-for="(value, index) in academic" :key="index">{{value}}</a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item
-        :label-col="{ span: 6 }"
-        :wrapper-col="{ span: 18 }"
-        label="专业"
-        v-if="profession"
-      >
-        <a-select
-          v-decorator="['profession']"
-          placeholder="请选择专业"
-          @change="handleSelectProfession"
-          ref="Profession"
-        >
-          <a-select-option
-            :value="value"
-            v-for="(value, index) in profession"
-            :key="index"
-          >{{value}}</a-select-option>
+      <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }" label="专业" v-if="profession">
+        <a-select v-decorator="['profession']" placeholder="请选择专业" @change="handleSelectProfession" ref="Profession">
+          <a-select-option :value="value" v-for="(value, index) in profession" :key="index">{{value}}</a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item
-        :label-col="{ span: 6 }"
-        :wrapper-col="{ span: 18 }"
-        label="班级"
-        v-if="classes"
-        ref="Classes"
-      >
+      <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }" label="班级" v-if="classes" ref="Classes">
         <a-select v-decorator="['class']" placeholder="请选择班级">
           <a-select-option :value="value" v-for="(value, index) in classes" :key="index">{{value}}</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item label="课程" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">
-        <a-input v-decorator="['courseName']" placeholder="请输入课程名"/>
+        <a-input v-decorator="['courseName']" placeholder="请输入课程名" />
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 1 }">
         <a-button type="primary" html-type="submit">搜索</a-button>

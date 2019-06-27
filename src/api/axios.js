@@ -36,7 +36,6 @@ export function signInDataPost(params, searchKey) {
       courseName: searchKey.courseName ? searchKey.courseName : ""
     };
   }
-  console.log(data);
   return axios
     .post(url, qs.stringify(data), {
       headers: {

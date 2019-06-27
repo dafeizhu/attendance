@@ -2,9 +2,7 @@
   <div>
     <signin-introduction></signin-introduction>
     <signin-selecttable @searchBtn="handleSearchBtn"></signin-selecttable>
-    <a-layout-content
-      :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '70vh' }"
-    >
+    <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '70vh' }">
       <signin-table :sessionId="sessionId" :searchData="searchData"></signin-table>
     </a-layout-content>
   </div>
@@ -14,6 +12,7 @@
 import SigninIntroduction from "./components/Introduction"
 import SigninTable from "./components/Table"
 import SigninSelecttable from "./components/SelectTable"
+
 export default {
   name: "SignIn",
   data () {
@@ -35,14 +34,6 @@ export default {
   methods: {
     handleSearchBtn (val) {
       this.searchData = val
-<<<<<<< HEAD
-=======
-      const params = {}
-      signInDataPost (params, val).then((data) => {
-        this.searchData = data
-        console.log(this.searchData)
-      })
->>>>>>> pages-user
     }
   }
 }
