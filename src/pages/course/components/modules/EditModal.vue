@@ -178,12 +178,6 @@
                 </a-form-item>
         </a-form>
         </a-row>
-        <!--<template slot="footer">-->
-            <!--<a-button key="back" @click="handleCancel">取消</a-button>-->
-            <!--<a-button key="submit" type="primary" :loading="EditLoading" @click="handleOk" >-->
-                <!--完成-->
-            <!--</a-button>-->
-        <!--</template>-->
     </a-modal>
 </template>:
 
@@ -238,28 +232,8 @@
       beforeCreate () {
         this.form = this.$form.createForm(this);
       },
-      // watch:{
-      //   EditData(){
-      //
-      //   }
-      // }
-      // beforeUpdate() {
-      //       setTimeout(() => {
-      //         this.form.setFieldsValue({
-      //           'class_class': "A",
-      //           'class_grade': "2016",
-      //           'class_profession': "计算机科学与技术",
-      //           'cou_info_address': "格物2C302",
-      //           'cou_info_class_term': "0302",
-      //           'cou_info_course_name': "移动开发实训",
-      //           'cou_info_weekcount': "1-18周",
-      //         })
-      //       },0)
-      // }
     }
 </script>
 <style scoped>
-    .from{
-        position: relative;
-    }
+
 </style>
