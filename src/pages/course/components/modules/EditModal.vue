@@ -6,178 +6,158 @@
         @ok="handleOk"
         cancelText="取消"
         okText="确认"
-        :width="490"
-
     >
-        <a-row>
-        <a-form  v-if="EditData"  :key="EditData.cou_info_id"   :form="form">
-                    <a-form-item
-                            label='cou_info_id'
-                            v-bind="formItemLayout"
-                    >
-                        <a-input
-                                style="width:100%"
-                                v-decorator="[
-                                'cou_info_id',
-                                    {
-                                        initialValue:EditData.cou_info_id
-                                    }
-                                ]"
-                        />
-                    </a-form-item>
-
-                    <a-form-item
-                        label="course_name"
-                        v-bind="formItemLayout"
-                    >
-                        <a-input
-                            style="width:100%"
-                            v-decorator="[
-                                'cou_info_course_name',
-                                {
-                                    initialValue:EditData.cou_info_course_name
-                                }
-                            ]"
-                        />
-                    </a-form-item>
-
-                    <a-form-item
-                        label='course_num'
-                        v-bind="formItemLayout"
-                    >
-                        <a-input
-                            style="width:100%"
-                            v-decorator="[
-                                'cou_info_course_num',
-                                {
-                                    initialValue:EditData.cou_info_course_num
-                                }
-                            ]"
-                        />
-                    </a-form-item>
-
-                    <a-form-item
-                            label='class_num'
-                            v-bind="formItemLayout"
-                    >
-                        <a-input
-                                style="width:100%"
-                                v-decorator="[
-                                    'cou_info_class_num',
-                                    {
-                                        initialValue:EditData.cou_info_class_num
-                                    }
-                                ]"
-                        />
-                    </a-form-item>
-
-                    <a-form-item
-                            label='class_term'
-                            v-bind="formItemLayout"
-                    >
-                        <a-input
-                                style="width:100%"
-                                v-decorator="[
-                                    'cou_info_class_term',
-                                        {
-                                            initialValue:EditData.cou_info_class_term
-                                        }
-                                ]"
-                        />
-                    </a-form-item>
-
-                    <a-form-item
-                        label='tea_num'
+        <div class="form-wrapper">
+            <a-form
+                v-if="EditData"
+                :key="EditData.cou_info_id"
+                :form="form"
+            >
+                <a-form-item
+                    label='cou_info_id'
+                    v-bind="formItemLayout"
+                >
+                    <a-input
+                        v-decorator="[
+                        'cou_info_id',
+                            {
+                                initialValue:EditData.cou_info_id
+                            }
+                        ]"
+                    />
+                </a-form-item>
+                <a-form-item
+                    label="course_name"
+                    v-bind="formItemLayout"
+                >
+                    <a-input
+                        v-decorator="[
+                            'cou_info_course_name',
+                            {
+                                initialValue:EditData.cou_info_course_name
+                            }
+                        ]"
+                    />
+                </a-form-item>
+                <a-form-item
+                    label='course_num'
+                    v-bind="formItemLayout"
+                >
+                    <a-input
+                        v-decorator="[
+                            'cou_info_course_num',
+                            {
+                                initialValue:EditData.cou_info_course_num
+                            }
+                        ]"
+                    />
+                </a-form-item>
+                <a-form-item
+                        label='class_num'
                         v-bind="formItemLayout"
                 >
                     <a-input
-                            style="width:100%"
-                            v-decorator="[
-                                'cou_info_tea_num',
-                                    {
-                                        initialValue:EditData.cou_info_tea_num
-                                    }
-                            ]"
+                        v-decorator="[
+                            'cou_info_class_num',
+                            {
+                                initialValue:EditData.cou_info_class_num
+                            }
+                        ]"
                     />
                 </a-form-item>
-
-                    <a-form-item
-                        label='weekcount'
+                <a-form-item
+                        label='class_term'
                         v-bind="formItemLayout"
                 >
                     <a-input
-                            style="width:100%"
-                            v-decorator="[
-                                'cou_info_weekcount',
-                                    {
-                                        initialValue:EditData.cou_info_weekcount
-                                    }
-                            ]"
+                        v-decorator="[
+                            'cou_info_class_term',
+                                {
+                                    initialValue:EditData.cou_info_class_term
+                                }
+                        ]"
                     />
                 </a-form-item>
-
-                    <a-form-item
+                <a-form-item
+                    label='tea_num'
+                    v-bind="formItemLayout"
+                >
+                    <a-input
+                        v-decorator="[
+                            'cou_info_tea_num',
+                                {
+                                    initialValue:EditData.cou_info_tea_num
+                                }
+                        ]"
+                    />
+                </a-form-item>
+                <a-form-item
+                    label='weekcount'
+                    v-bind="formItemLayout"
+                >
+                    <a-input
+                        v-decorator="[
+                            'cou_info_weekcount',
+                                {
+                                    initialValue:EditData.cou_info_weekcount
+                                }
+                        ]"
+                    />
+                </a-form-item>
+                <a-form-item
                     label='address'
                     v-bind="formItemLayout"
-            >
-                <a-input
-                        style="width:100%"
+                >
+                    <a-input
                         v-decorator="[
                             'cou_info_address',
                                 {
                                     initialValue:EditData.cou_info_address
                                 }
                         ]"
-                />
-            </a-form-item>
-
-                    <a-form-item
-                        label='length'
-                        v-bind="formItemLayout"
+                    />
+                </a-form-item>
+                <a-form-item
+                    label='length'
+                    v-bind="formItemLayout"
                 >
                     <a-input
-                            style="width:100%"
-                            v-decorator="[
-                            'cou_info_length',
-                                {
-                                    initialValue:EditData.cou_info_length
-                                }
+                        v-decorator="[
+                        'cou_info_length',
+                            {
+                                initialValue:EditData.cou_info_length
+                            }
                         ]"
                     />
                 </a-form-item>
-
-                    <a-form-item
-                        label='start'
-                        v-bind="formItemLayout"
+                <a-form-item
+                    label='start'
+                    v-bind="formItemLayout"
                 >
                     <a-input
-                            style="width:100%"
-                            v-decorator="[
-                            'cou_info_start',
-                                {
-                                    initialValue:EditData.cou_info_start
-                                }
+                        v-decorator="[
+                        'cou_info_start',
+                            {
+                                initialValue:EditData.cou_info_start
+                            }
                         ]"
-
                     />
                 </a-form-item>
-
-                    <a-form-item
-                        label='星期X'
-                        v-bind="formItemLayout"
+                <a-form-item
+                    label='星期X'
+                    v-bind="formItemLayout"
                 >
                     <a-input
-                            style="width:100%"
-                            v-decorator="[
-                            'cou_info_weekday',
-                                {
-                                    initialValue:EditData.cou_info_weekday
-                                }
-                            ]"
+                        v-decorator="[
+                        'cou_info_weekday',
+                            {
+                                initialValue:EditData.cou_info_weekday
+                            }
+                        ]"
                     />
                 </a-form-item>
-        </a-form>
-        </a-row>
+            </a-form>
+        </div>
     </a-modal>
 </template>:
 
@@ -189,21 +169,15 @@
           type: Object,
           default: null
         },
-        // visible:{
-        //   type:Boolean,
-        //   default:null
-        // }
       },
       data () {
         return {
           formItemLayout:{
               labelCol:{
-                xs:{ span:24 },
-                sm:{ span:7 }
+                span:6
               },
               wrapperCol:{
-                xs:{ span:24 },
-                sm:{ span:17 }
+                span:16
               }
           },
           disabled:true,
@@ -235,5 +209,10 @@
     }
 </script>
 <style scoped>
-
+.form-wrapper {
+    height: 650px;
+}
+.ant-form-item {
+    width: 100%;
+}
 </style>
