@@ -13,7 +13,6 @@ import { signInDataPost } from '../../api/axios'
 import SigninIntroduction from "./components/Introduction"
 import SigninTable from "./components/Table"
 import SigninSelecttable from "./components/SelectTable"
-
 export default {
   name: "SignIn",
   data () {

@@ -16,16 +16,6 @@ export default new Router({
           path: 'login',
           name: 'login',
           component: () => import(/* webpackChunkName: "user" */ '../pages/user/Login')
-        },
-        {
-          path: 'forget',
-          name: 'forget',
-          component: () => import(/* webpackChunkName: "user" */ '../pages/user/Forget')
-        },
-        {
-          path: 'register',
-          name: 'register',
-          component: () => import(/* webpackChunkName: "user" */ '../pages/user/Register')
         }
       ]
     },
