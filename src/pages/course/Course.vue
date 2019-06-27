@@ -14,7 +14,7 @@
     name: 'Course',
     data () {
       return {
-        searchData: {}
+        searchData: {},
       }
     },
     components: {
