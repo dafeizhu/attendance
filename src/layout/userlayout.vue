@@ -1,50 +1,58 @@
 <template>
   <div id="components-layout-demo-basic">
-    <a-layout>
-      <a-layout-header>
-        <div>
-          <div class="header-left">
-            <p>拿你桃管理系统</p>
-          </div>
-          <div class="header-right">
-            <a-breadcrumb separator="|">
-              <a-breadcrumb-item
-                v-for="item of items"
-                :key="item"
-              ><a href="">{{item}}</a></a-breadcrumb-item>
-            </a-breadcrumb>
-          </div>
-        </div>
-      </a-layout-header>
-      <a-layout-content>
-        <router-view></router-view>
-      </a-layout-content>
-      <a-layout-footer>
-        <layout-footer></layout-footer>
-      </a-layout-footer>
+    <div class="loading-container" v-if="show">
+      <loading></loading>
+    </div>
+    <a-layout v-if="!show">
+        <a-layout-header>
+                  <div>
+                    <div class="header-left">
+                      <p>拿你桃管理系统</p>
+                    </div>
+                    <div class="header-right">
+                      <a-breadcrumb separator="|">
+                        <a-breadcrumb-item
+                          v-for="item of items"
+                          :key="item"
+                        ><a href="">{{item}}</a></a-breadcrumb-item>
+                      </a-breadcrumb>
+                    </div>
+                  </div>
+                </a-layout-header>
+        <a-layout-content>
+            <router-view></router-view>
+          </a-layout-content>
+        <a-layout-footer >
+              <layout-footer></layout-footer>
+          </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
 <script>
 import layoutFooter from '../common/footer/Footer'
+import Loading from "../pages/user/Loading";
 export default {
   data () {
     return {
       items: ['基本版', 'English', '手机版'],
-      spinning: false
+      show: true
     }
   },
   created() {
   },
   mounted () {
-    document.body.classList.add('userLayout')
+      document.body.classList.add('userLayout')
+      setTimeout(() => {
+          this.show = false
+      }, 1000)
   },
   beforeDestroy () {
-    document.body.classList.remove('userLayout')
+      document.body.classList.remove('userLayout')
   },
   components: {
-    layoutFooter
+      Loading,
+      layoutFooter
   }
 }
 </script>
@@ -86,5 +94,11 @@ export default {
 .ant-breadcrumb {
   line-height: 64px;
   height: 64px;
+}
+.loading-container{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%)
 }
 </style>

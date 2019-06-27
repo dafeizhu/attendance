@@ -1,52 +1,63 @@
 <template>
   <div id="components-layout-demo-basic">
-    <div class="wrapper">
-      <a-row>
-        <a-col :xs="0" :sm="0" :md="12" :lg="12" :xl="12">
-          <div class="content-right">
-            <span class="content-right-title">好学生，不逃课！</span>
-            <p class="content-right-dscone">{{contentRight[randomNum].dscOne}}</p>
-            <p class="content-right-dsctwo">{{contentRight[randomNum].dscTwo}}</p>
-            <img class="content-right-img" :src="contentRight[randomNum].imgUrl" />
-          </div>
-        </a-col>
-        <a-col :xs="0" :sm="4" :md="0" :lg="0" :xl="0" />
-        <a-col :xs="24" :sm="20" :md="12" :lg="12" :xl="12">
-          <div class="login-form-border">
-            <p>欢迎登录</p>
-            <a-form id="components-form-demo-normal-login" :form="form" class="login-form" @submit="handleSubmit">
-              <a-form-item>
-                <a-input v-decorator="['userName',
-                      { rules: [{ required: true, message: '请输入用户名!' }] }]" placeholder="用户名">
-                  <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-input v-decorator="['password',
-                      { rules: [{ required: true, message: '请输入密码!' }] }]" type="password" placeholder="请输入密码">
-                  <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-checkbox v-decorator="['remember', { valuePropName: 'checked', initialValue: true, }]">记住我</a-checkbox>
-                <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
-              </a-form-item>
-            </a-form>
-          </div>
-        </a-col>
-      </a-row>
-    </div>
-    <a-modal title="提示" v-model="visible" @ok="handleOk">
-      <p>登录成功！</p>
-    </a-modal>
-    <a-modal title="提示" v-model="fail" @ok="handleConfirm">
-      <p>用户名或密码不正确！</p>
-    </a-modal>
+      <div class="wrapper">
+          <a-row>
+            <a-col :xs="0" :sm="0" :md="12" :lg="12" :xl="12">
+              <div class="content-right">
+                <span class="content-right-title">好学生，不逃课！</span>
+                <p class="content-right-dscone">{{contentRight[randomNum].dscOne}}</p>
+                <p class="content-right-dsctwo">{{contentRight[randomNum].dscTwo}}</p>
+                <img class="content-right-img" :src="contentRight[randomNum].imgUrl" />
+              </div>
+            </a-col>
+            <a-col :xs="0" :sm="4" :md="0" :lg="0" :xl="0" />
+            <a-col :xs="24" :sm="20" :md="12" :lg="12" :xl="12">
+              <div class="login-form-border">
+                <p>欢迎登录</p>
+                <a-form
+                  id="components-form-demo-normal-login"
+                  :form="form"
+                  class="login-form"
+                  @submit="handleSubmit"
+                >
+                  <a-form-item>
+                    <a-input
+                      v-decorator="['userName',
+                      { rules: [{ required: true, message: '请输入用户名!' }] }]"
+                      placeholder="用户名"
+                    >
+                      <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
+                    </a-input>
+                  </a-form-item>
+                  <a-form-item>
+                    <a-input
+                      v-decorator="['password',
+                      { rules: [{ required: true, message: '请输入密码!' }] }]"
+                      type="password"
+                      placeholder="请输入密码"
+                    >
+                      <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
+                    </a-input>
+                  </a-form-item>
+                  <a-form-item>
+                    <a-checkbox
+                      v-decorator="['remember', { valuePropName: 'checked', initialValue: true, }]"
+                    >记住我</a-checkbox>
+                    <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
+                  </a-form-item>
+                </a-form>
+              </div>
+            </a-col>
+          </a-row>
+      </div>
   </div>
 </template>
 
 <script>
 import { loginDataPost } from '../../api/axios'
+import {message} from 'ant-design-vue'
+import Vue from 'vue'
+Vue.prototype.$message = message
 export default {
   name: "Login",
   beforeCreate () {
@@ -94,12 +105,19 @@ export default {
         if (!err) {
           loginDataPost(values).then((res) => {
             if (res[0].islogin == "1") {
-              this.visible = true
+              this.$message.success('登录成功',2)
+              this.$router.push({
+                    name: 'SignIn'
+                })
               if (values.remember === true) {
                 that.setCookie(values.userName, values.password, 7)
               }
             } else {
-              this.fail = true
+                this.$message.error('用户名或密码不正确',2)
+                this.form.setFieldsValue({
+                    'userName': '',
+                    'password': ''
+                })
             }
           })
         }
@@ -132,19 +150,6 @@ export default {
         }
       }
     },
-    handleOk: function () {
-      this.$router.push({
-        name: 'SignIn'
-      })
-    },
-
-    handleConfirm: function () {
-      this.fail = false
-      this.form.setFieldsValue({
-        'userName': '',
-        'password': ''
-      })
-    }
   },
   computed: {
     randomNum () {
