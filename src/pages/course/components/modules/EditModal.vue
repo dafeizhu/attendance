@@ -14,7 +14,7 @@
                 :form="form"
             >
                 <a-form-item
-                    label='cou_info_id'
+                    label='课程ID'
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -27,7 +27,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label="course_name"
+                    label="课程名"
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -40,7 +40,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label='course_num'
+                    label='课程号'
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -53,7 +53,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                        label='class_num'
+                        label='班级号'
                         v-bind="formItemLayout"
                 >
                     <a-input
@@ -66,7 +66,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                        label='class_term'
+                        label='学期'
                         v-bind="formItemLayout"
                 >
                     <a-input
@@ -79,7 +79,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label='tea_num'
+                    label='教师号'
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -92,7 +92,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label='weekcount'
+                    label='上课周数'
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -105,7 +105,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label='address'
+                    label='课程地点'
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -118,7 +118,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label='length'
+                    label='课程时长'
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -131,7 +131,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label='start'
+                    label='课程开始'
                     v-bind="formItemLayout"
                 >
                     <a-input
@@ -144,7 +144,7 @@
                     />
                 </a-form-item>
                 <a-form-item
-                    label='星期X'
+                    label='星期*'
                     v-bind="formItemLayout"
                 >
                     <a-input
