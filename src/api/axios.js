@@ -200,7 +200,17 @@ export function courseEdited (val){
   })
 }
 
-
-
-
+// 新建课程信息接口函数
+export function courseCreate (val){
+  const url = "http://139.199.192.171:8080/nanitao/courseInfo/create.action";
+  var data = val
+  return axios.post(url,qs.stringify(data),{
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;'
+    }
+  }).then((res) => {
+    console.log(res);
+    return Promise.resolve(res)
+  })
+}
 

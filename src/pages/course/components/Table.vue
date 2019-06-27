@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <a-button class="editable-add-btn" type="primary" @click="handleAdd" icon="plus">新建</a-button>
         <a-table
                 row-key="cou_info_id"
                 :columns="columns"
@@ -25,16 +26,18 @@
         <edit-modal
                 :edit-data="EditData"
                 @submit="handleOk"
-                ref="modal"
+                ref="editmodal"
         >
 
         </edit-modal>
+        <create-modal ref="createmodal" @submit="CreateOk"></create-modal>
     </div>
 </template>
 
 <script>
-  import { courseDataPost,courseDelete,courseEdit,courseEdited } from '../../../api/axios'
+  import { courseDataPost,courseDelete,courseEdit,courseEdited,courseCreate } from '../../../api/axios'
   import EditModal from './modules/EditModal'
+  import CreateModal from './modules/CreateModal'
   const columns = [{
     title: '课程名',
     dataIndex: 'cou_info_course_name',
@@ -84,7 +87,8 @@
   export default {
     name: 'CourseTable',
     components:{
-      EditModal
+      EditModal,
+      CreateModal
     },
     props: {
       searchData: {
@@ -97,7 +101,6 @@
     },
     data() {
       return {
-        // visible:false,
         data: [],
         pagination: {},
         loading: false,
@@ -108,12 +111,21 @@
       }
     },
     methods: {
+      CreateOk(val){
+        courseCreate(val).then((data) =>{
+          console.log(data);
+          this.fetch()
+        })
+      },
+      handleAdd(){
+        this.$refs.createmodal.add()
+      },
       handleEdit(key){
         this.EditData = {}
         courseEdit(key).then((data) =>{
           if(data.statusText == 'OK'){
             this.EditData = data.data
-            this.$refs.modal.edit()
+            this.$refs.editmodal.edit()
             // this.visible = true
           }
         })
@@ -169,11 +181,15 @@
 </script>
 
 <style scoped>
-    .wrapper {
-        min-height: 70px;
-        background: #fff;
-        margin: 24px 16px;
-        padding: 24px;
-        overflow: hidden;
-    }
+.wrapper {
+    min-height: 70px;
+    background: #fff;
+    margin: 24px 16px;
+    padding: 24px;
+    overflow: hidden;
+}
+.editable-add-btn {
+    margin-bottom: 8px;
+}
 </style>
+
