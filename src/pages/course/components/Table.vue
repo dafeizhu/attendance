@@ -80,9 +80,10 @@
     key: 'cou_info_address',
     align: 'center'
   },{
-    title: 'Operate',
+    title: '操作',
     dataIndex: 'operate',
-    scopedSlots: { customRender: 'operate' }
+    scopedSlots: { customRender: 'operate' },
+    align: 'center'
   }];
   export default {
     name: 'CourseTable',

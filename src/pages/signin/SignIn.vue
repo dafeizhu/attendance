@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { signInDataPost } from '../../api/axios'
 import SigninIntroduction from "./components/Introduction"
 import SigninTable from "./components/Table"
 import SigninSelecttable from "./components/SelectTable"
@@ -33,13 +32,7 @@ export default {
   },
   methods: {
     handleSearchBtn (val) {
-      console.log(val);
       this.searchData = val
-      const params = {}
-      signInDataPost (params, val).then((data) => {
-        this.searchData = data
-        console.log(this.searchData)
-      })
     }
   }
 }

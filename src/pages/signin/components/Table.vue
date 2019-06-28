@@ -1,5 +1,16 @@
 <template>
-  <a-table :columns="columns" :dataSource="data" :pagination="pagination" :loading="loading" @change="handleTableChange"></a-table>
+  <div>
+    <a-table :columns="columns" :dataSource="data" :pagination="pagination" :loading="loading" @change="handleTableChange">
+      <div slot="operate">
+        <a-button type="primary" @click="showModal">查看详情</a-button>
+      </div>
+    </a-table>
+    <a-modal :footer="null" :centered="true" title="缺勤名单" :visible="visible" @ok="handleOk" :confirmLoading="confirmLoading" @cancel="handleCancel">
+      <ul class="list" v-for="(item, index) in absenceList[currentTarget]" :key="index">
+        <li>{{item.stu_name}} {{item.stu_num}}</li>
+      </ul>
+    </a-modal>
+  </div>
 </template>
 
 <script>
@@ -58,6 +69,12 @@ const columns = [
     dataIndex: "count",
     key: "count",
     align: "center"
+  },
+  {
+    title: '缺勤学生',
+    scopedSlots: { customRender: 'operate' },
+    key: "key",
+    align: "center"
   }
 ]
 export default {
@@ -76,7 +93,12 @@ export default {
       data: [],
       pagination: {},
       loading: false,
-      columns
+      columns,
+      ModalText: '查看缺勤学生',
+      visible: false,
+      confirmLoading: false,
+      absenceList: [],
+      currentTarget: 0
     }
   },
   methods: {
@@ -100,6 +122,27 @@ export default {
         this.loading = false
         this.data = data.rows
         this.pagination = pagination
+        this.absenceListAdd(data.rows)
+      })
+    },
+    showModal (e) {
+      this.visible = true
+      this.currentTarget = e.path[3].dataset.rowKey - 1
+    },
+    handleOk () {
+      this.ModalText = 'The modal will be closed after two seconds';
+      this.confirmLoading = true;
+      setTimeout(() => {
+        this.visible = false;
+        this.confirmLoading = false;
+      }, 2000);
+    },
+    handleCancel () {
+      this.visible = false
+    },
+    absenceListAdd (list) {
+      list.forEach(item => {
+        this.absenceList.push(item.absencelist)
       })
     }
   },
@@ -113,4 +156,9 @@ export default {
 </script>
 
 <style scoped>
+.list {
+  list-style: none;
+  text-align: center;
+  font-size: 16px;
+}
 </style>
