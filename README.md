@@ -7,7 +7,7 @@
 ![](https://github.com/dafeizhu/attendance/blob/master/imgs/加载loading.PNG)
 <br>
 ### 登录界面，随机加载图片以及登录表单
-![](https://github.com/dafeizhu/attendance/blob/master/imgs/登录界面.PNG)
+![](https://github.com/dafeizhu/attendance/blob/master/imgs/%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2.PNG)
 <br>
 ### 查看缺勤名单
 ![](https://github.com/dafeizhu/attendance/blob/master/imgs/查看缺勤名单.PNG)
